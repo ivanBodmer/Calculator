@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-// todo доделай максимальные числа
 public class Testing {
 
     public static void main(String[] args) {
