@@ -3,16 +3,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Testing {
+public class Main {
 
     public static void main(String[] args) {
 
-        int j = 0;
+
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
-        String[] splitByRegex = str.split("([+]|-|[*]|/|^)");
-        String[] splitBySpace = str.split(" ");
-        if (str.length() < 2)
+        System.out.println(calc(str));
+
+    }
+
+    public static String calc(String input) {
+        String answer1 = "";
+
+        int j = 0;
+        String[] splitByRegex = input.split("([+]|-|[*]|/|^)");
+        String[] splitBySpace = input.split(" ");
+        if (input.length() < 2)
             throw new IllegalArgumentException("String is not a mathematical operation"); //строка не является математической операцией
         if (splitBySpace.length > 3 || splitByRegex.length == 1)
             throw new IllegalArgumentException("Wrong format - two operands and one operator (+, -, /, *)"); //формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)
@@ -25,7 +33,7 @@ public class Testing {
                         Integer integer = arabMap.get(splitByRegex[j].trim());
                         Integer integer1 = arabMap.get(splitByRegex[j + 1].trim());
                         int answer = integer + integer1;
-                        System.out.println(answer);
+                        answer1 += Integer.toString(answer);
                     } catch (IllegalArgumentException e) {
                         throw new IllegalArgumentException("wrong numbers");
                     }
@@ -35,7 +43,7 @@ public class Testing {
                         Integer integer = arabMap.get(splitByRegex[j].trim());
                         Integer integer1 = arabMap.get(splitByRegex[j + 1].trim());
                         int answer = integer - integer1;
-                        System.out.println(answer);
+                        answer1 += Integer.toString(answer);
                     } catch (IllegalArgumentException e) {
                         throw new IllegalArgumentException("wrong numbers");
                     }
@@ -44,7 +52,7 @@ public class Testing {
                         Integer integer = arabMap.get(splitByRegex[j].trim());
                         Integer integer1 = arabMap.get(splitByRegex[j + 1].trim());
                         int answer = integer * integer1;
-                        System.out.println(answer);
+                        answer1 += Integer.toString(answer);
                     } catch (IllegalArgumentException e) {
                         throw new IllegalArgumentException("wrong numbers");
                     }
@@ -53,7 +61,7 @@ public class Testing {
                         Integer integer = arabMap.get(splitByRegex[j].trim());
                         Integer integer1 = arabMap.get(splitByRegex[j + 1].trim());
                         int answer = integer / integer1;
-                        System.out.println(answer);
+                        answer1 += Integer.toString(answer);
                     } catch (IllegalArgumentException e) {
                         throw new IllegalArgumentException("wrong numbers");
                     }
@@ -65,7 +73,7 @@ public class Testing {
                         Integer integer = romeMap.get(splitByRegex[j].trim());
                         Integer integer1 = romeMap.get(splitByRegex[j + 1].trim());
                         int answer = integer + integer1;
-                        System.out.println(convertArabToRoman(answer));
+                        answer1 += convertArabToRoman(answer);
                     } catch (IllegalArgumentException e) {
                         throw new IllegalArgumentException("wrong numbers");
                     }
@@ -74,7 +82,7 @@ public class Testing {
                         Integer integer = romeMap.get(splitByRegex[j].trim());
                         Integer integer1 = romeMap.get(splitByRegex[j + 1].trim());
                         int answer = integer * integer1;
-                        System.out.println(convertArabToRoman(answer));
+                        answer1 += convertArabToRoman(answer);
                     } catch (IllegalArgumentException e) {
                         throw new IllegalArgumentException("wrong numbers");
                     }
@@ -83,7 +91,7 @@ public class Testing {
                         Integer integer = romeMap.get(splitByRegex[j].trim());
                         Integer integer1 = romeMap.get(splitByRegex[j + 1].trim());
                         int answer = integer / integer1;
-                        System.out.println(convertArabToRoman(answer));
+                        answer1 += convertArabToRoman(answer);
                     } catch (IllegalArgumentException e) {
                         throw new IllegalArgumentException("wrong numbers");
                     }
@@ -98,7 +106,7 @@ public class Testing {
                     }
                     if (integer > integer1) {
                         int answer = integer - integer1;
-                        System.out.println(convertArabToRoman(answer));
+                        answer1 += convertArabToRoman(answer);
                     } else
                         throw new IllegalArgumentException("there are no negative numbers in the Roman system");//в римской системе нет отрицательных чисел
                 }
@@ -106,6 +114,7 @@ public class Testing {
         } else
             throw new IllegalArgumentException("different number systems are used simultaneously");//используются одновременно разные системы счисления
 
+        return answer1;
     }
 
     public static boolean validRome(String str) {
